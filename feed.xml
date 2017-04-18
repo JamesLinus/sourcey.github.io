@@ -2,16 +2,219 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Sourcey</title>
   <subtitle>Developers of code and websites for forward-thinking technology startups.</subtitle>
-  <id>http://sourcey.com</id>
-  <link href="http://sourcey.com"/>
-  <link href="http://sourcey.com/feed.xml" rel="self"/>
-  <updated>2017-03-29T00:00:00Z</updated>
+  <id>https://sourcey.com</id>
+  <link href="https://sourcey.com"/>
+  <link href="https://sourcey.com/feed.xml" rel="self"/>
+  <updated>2017-04-17T00:00:00Z</updated>
   <entry>
-    <title>Pre-compiled WebRTC Libraries for Windows</title>
-    <link rel="alternate" href="http://sourcey.com/precompiled-webrtc-for-windows/"/>
-    <id>http://sourcey.com/precompiled-webrtc-for-windows/</id>
+    <title>Precompiled WebRTC Builds</title>
+    <link rel="alternate" href="https://sourcey.com/webrtc-precompiled-builds/"/>
+    <id>https://sourcey.com/webrtc-precompiled-builds/</id>
+    <published>2017-04-17T00:00:00Z</published>
+    <updated>2017-04-18T14:41:58+02:00</updated>
+    <author>
+      <name/>
+    </author>
+    <content type="html">&lt;!-- 
+&lt;div class="sidebar-section toc"&gt;
+#### Contents
+{:.no_toc}
+
+* ToC
+{:toc}
+&lt;/div&gt;
+--&gt;
+&lt;!-- subtitle: For Linux and Windows --&gt;
+&lt;!-- ![WebRTC](logos/webrtc-250x250.png "WebRTC"){: .align-left} --&gt;
+&lt;!-- ## Downloads --&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="columns medium-3 show-for-medium-up text-center"&gt;
+    &lt;p&gt;&lt;img alt="WebRTC" title="WebRTC" class="no-style" src="/images/logos/webrtc-250x250.png" width="185" /&gt;&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="columns medium-9"&gt;
+    &lt;p&gt;Save yourself the tears and frustration — precompiled WebRTC native libraries and headers are available for download here. Linux and Windows &lt;code&gt;Debug&lt;/code&gt; and &lt;code&gt;Release&lt;/code&gt; builds are provided for &lt;code&gt;x86&lt;/code&gt; and &lt;code&gt;x64&lt;/code&gt; architectures. &lt;a href="#usage"&gt;Usage instructions are below&lt;/a&gt;&lt;/p&gt;
+
+    &lt;div id="webrtc-filters" class="row collapse"&gt;
+      &lt;div class="columns small-4" style="padding-right: 0.9375rem"&gt;
+        &lt;p&gt;&lt;button data-dropdown="filter-platform" class="small secondary radius button dropdown expand no-margin" aria-expanded="false" aria-controls="filter-platform"&gt;Platform&lt;/button&gt;&lt;/p&gt;
+        &lt;ul id="filter-platform" data-dropdown-content="" class="f-dropdown" aria-hidden="true" tabindex="-1"&gt;
+  &lt;li&gt;&lt;a href="#" data-filter="platform" data-value="linux"&gt;Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#" data-filter="platform" data-value="win"&gt;Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class="columns small-4"&gt;
+        &lt;p&gt;&lt;button data-dropdown="filter-arch" class="small secondary radius button dropdown expand no-margin" aria-expanded="false" aria-controls="filter-arch"&gt;Architecture&lt;/button&gt;&lt;/p&gt;
+        &lt;ul id="filter-arch" data-dropdown-content="" class="f-dropdown" aria-hidden="true" tabindex="-1"&gt;
+  &lt;li&gt;&lt;a href="#" data-filter="arch" data-value="x64"&gt;x64&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#" data-filter="arch" data-value="x86"&gt;x86&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class="columns small-4" style="padding-left: 0.9375rem"&gt;
+        &lt;p&gt;&lt;button data-dropdown="filter-branch" class="small secondary radius button dropdown expand no-margin" aria-expanded="false" aria-controls="filter-version"&gt;Version&lt;/button&gt;&lt;/p&gt;
+        &lt;ul id="filter-branch" data-dropdown-content="" class="f-dropdown" aria-hidden="true" tabindex="-1"&gt;
+  &lt;!--   
+  &lt;li&gt;&lt;a href="#" data-filter="branch" data-value="branch-heads/58"&gt;branch-heads/58&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#" data-filter="branch" data-value="branch-heads/57"&gt;branch-heads/57&lt;/a&gt;&lt;/li&gt; 
+  --&gt;
+&lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;table id="webrtc-builds" width="100%"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;File&lt;/th&gt;
+      &lt;th&gt;Platform&lt;/th&gt;
+      &lt;th&gt;Version&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+var $root = $('#webrtc-builds tbody');
+
+// $.getJSON("/webrtc-precompiled-builds/manifest.json", function(data) {
+$.getJSON("https://raw.githubusercontent.com/sourcey/webrtc-precompiled-builds/master/manifest.json", function(data) {
+  console.log('Loaded manifest', data)
+
+  var builds = [];
+  $.each(data, function(key, val) {
+    $root.append(
+      '&lt;tr data-platform="' + val.target_os + '" data-arch="' + val.target_cpu + '" data-branch="' + val.branch + '"&gt;' +
+        '&lt;td&gt;' + 
+          '&lt;a href="https://github.com/sourcey/webrtc-precompiled-builds/raw/master/' + val.file + '"&gt;' + val.file + '&lt;/a&gt;' +
+          '&lt;small&gt;CRC: ' + val.crc + '&lt;/small&gt;' + 
+        '&lt;/td&gt;' +
+        '&lt;td&gt;' + (val.target_os == 'linux' ? 'Linux' : 'Windows') + ' ' + val.target_cpu + '&lt;/td&gt;' +
+        '&lt;td&gt;' + 
+          (val.latest ? '&lt;span class="success round label right"&gt;Latest&lt;/span&gt;' : ''
+) + 
+          val.date + 
+          // '&lt;small&gt;SHA: ' + val.sha + '&lt;/small&gt;' +
+          '&lt;small&gt;Branch: ' + val.branch + '&lt;/small&gt;' +
+          '&lt;small&gt;Revision: ' + val.revision + '&lt;/small&gt;' +
+        '&lt;/td&gt;' +
+      '&lt;/tr&gt;');
+
+    if (builds.indexOf(val.branch) === -1)
+        builds.push(val.branch);
+  });
+
+  for (var i = 0; i &lt; builds.length; i++) { 
+    $('#filter-branch').append(
+      '&lt;li&gt;&lt;a href="#" data-filter="branch" data-value="' + builds[i] + '"&gt;' + builds[i] + '&lt;/a&gt;&lt;/li&gt;');
+  }
+});
+
+function updateVisibleEntries() {
+  var filters = $('#webrtc-filters li.active').map(function() {
+    var $a = $(this).find('a');
+    return { name: $a.data('filter'), value: $a.data('value') };
+  }).get();
+  // console.log(filters)
+
+  $root.find('tr').show();
+  for (var i = 0; i &lt; filters.length; i++) { 
+    var filter = filters[i];
+    console.log('tr[data-' + filter.name + '!="' + filter.value + '"]')
+    $root.find('tr[data-' + filter.name + '!="' + filter.value + '"]').hide();
+  }
+}
+
+$('#webrtc-filters').on('click', 'li a', function() {
+  event.preventDefault();
+  var $link = $(this)
+    , $list = $link.parents('ul:first')
+    , $button = $list.parent('div').find('button');
+  $list.find('li').removeClass('active');
+  $link.parents('li:first').addClass('active');
+  $button.text($link.text());
+  $(document).click();
+  updateVisibleEntries();
+})
+&lt;/script&gt;
+
+&lt;style&gt;
+/*#main .content img.align-left {
+  max-width: 150px;
+  margin-bottom: 20px;  
+}*/
+
+#webrtc-filters {
+  margin-top: 25px;    
+  padding-top: 0.9375rem;
+
+  border-top: 1px solid #f0f0f2;
+}
+#webrtc-filters p {
+  margin-bottom: 0.9375rem;  
+
+}
+#webrtc-filters .button {
+  padding-left: 0.9375rem;
+  text-align: left;
+}
+
+#webrtc-builds {
+  margin-bottom: 35px;
+}
+#webrtc-builds small {
+  font-size: 80%;
+  color: #888;
+  display: block;
+}
+&lt;/style&gt;
+
+&lt;h2 id="about"&gt;About&lt;/h2&gt;
+
+&lt;p&gt;After a number of requests we’ve started providing precompiled WebRTC builds to assist &lt;a href="/libsourcey"&gt;LibSourcey&lt;/a&gt; developers. All native libraries and headers required for WebRTC development on Windows and Linux are included in the builds, and although the builds are designed for LibSourcey developers, they can be freely used by all.&lt;/p&gt;
+
+&lt;p&gt;The WebRTC repository is a monster weighing in at over &lt;strong&gt;10gb&lt;/strong&gt; with a myriad of dependencies that no developer without a fat paycheck from Google should ever have to mess with. However, once the excess fat has been trimmed it’s possible to get the archived build size down to about &lt;code&gt;50mb&lt;/code&gt; including all static libraries and headers. Jenny Craig would be proud!&lt;/p&gt;
+
+&lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;Download the packages for your platform and architecture, extract them, and link them with your project - there’s no need to compile anything or jump through any hoops.&lt;/p&gt;
+
+&lt;p&gt;On Windows you will need &lt;a href="http://www.7-zip.org/download.html"&gt;7-Zip&lt;/a&gt; to extract the archives, and on Linux the archives are in &lt;code&gt;.tar.gz&lt;/code&gt; format. All static WebRTC libraries have meen merged into a single library for convenience (&lt;code&gt;libwebrtc_full.lib&lt;/code&gt; on Windows and &lt;code&gt;libwebrtc_full.a&lt;/code&gt; on Linux), so you just need to link this one library with your project to include all WebRTC components.&lt;/p&gt;
+
+&lt;p&gt;The folder structure is setup so you can extract both the &lt;code&gt;x64&lt;/code&gt; and &lt;code&gt;x86&lt;/code&gt; archives from the same build version into a single root directory:&lt;/p&gt;
+
+&lt;pre class="highlight shell"&gt;&lt;code&gt;webrtc-build/
+├── third_party/      &amp;lt;-- webrtc dependency headers
+├── webrtc/           &amp;lt;-- webrtc core headers
+└── lib/
+    ├── x64/
+    │   ├── Debug     &amp;lt;-- x64 debug libraries
+    │   ├── Release   &amp;lt;-- x64 release libraries
+    ├── x86/
+    │   ├── Debug     &amp;lt;-- x86 debug libraries
+    │   ├── Release   &amp;lt;-- x86 release libraries
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="build-details"&gt;Build details&lt;/h2&gt;
+
+&lt;p&gt;Windows libraries are compiled with Visual Studio 2015 Update 3, while Linux builds are compiled with &lt;code&gt;gcc&lt;/code&gt; on Ubuntu 16.10.&lt;/p&gt;
+
+&lt;p&gt;Debug builds have been created with all debug symbols enabled, and release builds have been optimized for for maximum performance. The exact &lt;code&gt;gn&lt;/code&gt; build options used are as follows:&lt;/p&gt;
+
+&lt;pre class="highlight shell"&gt;&lt;code&gt;gn gen out/x86/Debug --args&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"is_debug=true rtc_include_tests=false target_cpu=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;x86&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+gn gen out/x86/Release --args&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"is_debug=false rtc_include_tests=false target_cpu=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;x86&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt; symbol_level=0 enable_nacl=false"&lt;/span&gt;
+gn gen out/x64/Debug --args&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"is_debug=true rtc_include_tests=false target_cpu=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;x64&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+gn gen out/x64/Release --args&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"is_debug=false rtc_include_tests=false target_cpu=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;x64&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt; symbol_level=0 enable_nacl=false"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Precompiled WebRTC Libraries for Windows</title>
+    <link rel="alternate" href="https://sourcey.com/precompiled-webrtc-for-windows/"/>
+    <id>https://sourcey.com/precompiled-webrtc-for-windows/</id>
     <published>2017-03-29T00:00:00Z</published>
-    <updated>2017-03-29T21:16:32+02:00</updated>
+    <updated>2017-04-01T02:47:43+02:00</updated>
     <author>
       <name/>
     </author>
@@ -21,23 +224,28 @@
 &lt;ul id="markdown-toc"&gt;
   &lt;li&gt;&lt;a id="markdown-toc-downloads" href="#downloads"&gt;Downloads&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a id="markdown-toc-usage" href="#usage"&gt;Usage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a id="markdown-toc-build-options" href="#build-options"&gt;Build options&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a id="markdown-toc-build-details" href="#build-details"&gt;Build details&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;&lt;img alt="WebRTC" title="WebRTC" class="align-left" src="/images/logos/webrtc-250x250.png" /&gt;
-After a number of requests from frustrated developers we’ve started providing pre-compiled WebRTC native libraries and headers for Windows.&lt;/p&gt;
+Save yourself the tears and frustration — precompiled WebRTC native libraries and headers for Windows are now available. These builds were originally made for &lt;a href="/libsourcey"&gt;LibSourcey&lt;/a&gt; developers, but can be freely used by all.&lt;/p&gt;
 
-&lt;p&gt;Weighing in at over &lt;strong&gt;6gb&lt;/strong&gt;, the WebRTC repository is an absolute monster with a myriad of dependencies that no developer without a fat paycheck from Google should ever have to mess with. However, once the fat was trimmed we were able to reduce archived file size for all required dev headers down to about &lt;strong&gt;2.3mb&lt;/strong&gt;, and pre-compiled Debug and Release libraries down to just &lt;strong&gt;72.3mb&lt;/strong&gt;.&lt;/p&gt;
+&lt;!--
+subtitle: WebRTC has gone on a Diet
+ After a number of requests from frustrated developers we've started providing precompiled WebRTC native libraries and headers for Windows. --&gt;
 
-&lt;p&gt;These libraries are provided for use with &lt;a href="/libsourcey"&gt;LibSourcey&lt;/a&gt;, but can be freely used by anyone. Builds are not nightly just yet, but we will update the build for every major release and important bugfix.&lt;/p&gt;
+&lt;p&gt;Weighing in at over &lt;strong&gt;6gb&lt;/strong&gt;, the WebRTC repository is an absolute monster with a myriad of dependencies that no developer without a fat paycheck from Google should ever have to mess with. However, once the fat was trimmed and compression was added, all required WebRTC and third party headers weighed in at &lt;strong&gt;2.3mb&lt;/strong&gt;, and precompiled Debug and Release libraries were reduced to under &lt;strong&gt;50mb&lt;/strong&gt;. Jenny Craig would be proud.
+&lt;!-- That's one hell of a diet. --&gt;
+&lt;!-- the archive file size for  --&gt;
+&lt;!-- Builds are not nightly just yet, but we will update the build for every major release and important bugfix. --&gt;&lt;/p&gt;
 
 &lt;h2 id="downloads"&gt;Downloads&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;master (0e22a4cfd) — Feb 23 07:11:32 2017&lt;/strong&gt;&lt;/p&gt;
 
-&lt;table width="100%"&gt;
+&lt;table width="100%" style="margin-bottom: 35px"&gt;
   &lt;tr&gt;
     &lt;th&gt;File&lt;/th&gt;
     &lt;th&gt;Size&lt;/th&gt;
@@ -60,11 +268,38 @@ After a number of requests from frustrated developers we’ve started providing 
   &lt;/tr&gt;
 &lt;/table&gt;
 
+&lt;p&gt;&lt;strong&gt;branch-heads/57 (0a71dc836) — Feb 21 15:18:16 2017&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This library archives are significantly smaller since they don’t include the molythic &lt;code&gt;webrtc.lib&lt;/code&gt; that’s on master.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;table width="100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;File&lt;/th&gt;
+    &lt;th&gt;Size&lt;/th&gt;
+    &lt;th&gt;Description&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;a href="https://github.com/sourcey/webrtc-windows-builds/raw/master/webrtc-branch-heads-57-0a71dc836-headers.7z"&gt;webrtc-branch-heads-57-0a71dc836-headers.7z&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;2.5mb&lt;/td&gt;
+    &lt;td&gt;Development headers&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;a href="https://github.com/sourcey/webrtc-windows-builds/raw/master/webrtc-branch-heads-57-0a71dc836-vs2015-x64.7z"&gt;webrtc-branch-heads-57-0a71dc836-vs2015-x64.7z&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;44.3mb&lt;/td&gt;
+    &lt;td&gt;Windows 64-bit (x64) Debug and Release libraries&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;a href="https://github.com/sourcey/webrtc-windows-builds/raw/master/webrtc-branch-heads-57-0a71dc836-vs2015-x86.7z"&gt;webrtc-branch-heads-57-0a71dc836-vs2015-x86.7z&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;35.9mb&lt;/td&gt;
+    &lt;td&gt;Windows 32-bit (x86) Debug and Release libraries&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
 &lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
 
-&lt;p&gt;There’s no need to compile anything or jump through any hoops, just &lt;a href="#downloads"&gt;download&lt;/a&gt; the packages and extract them.&lt;/p&gt;
-
-&lt;p&gt;Libraries have been compiled with Visual Studio 2015 Update 2 on Windows 10, with both &lt;code&gt;Debug&lt;/code&gt; and &lt;code&gt;Release&lt;/code&gt; versions provided for &lt;code&gt;x86&lt;/code&gt; and &lt;code&gt;x64&lt;/code&gt; architectures. You will need &lt;a href="http://www.7-zip.org/download.html"&gt;7-Zip&lt;/a&gt; to extract the archives.&lt;/p&gt;
+&lt;p&gt;There’s no need to compile anything or jump through any hoops, just &lt;a href="#downloads"&gt;download&lt;/a&gt; the packages, extract them, and link them with your project. You will need &lt;a href="http://www.7-zip.org/download.html"&gt;7-Zip&lt;/a&gt; to extract the archives.&lt;/p&gt;
 
 &lt;p&gt;The folder structure is setup so you can selectively extract all three archives, &lt;code&gt;*-headers.7z&lt;/code&gt;, &lt;code&gt;*-vs2015-x64.7z&lt;/code&gt; and &lt;code&gt;*-vs2015-x64.7z&lt;/code&gt; into the same root directory:&lt;/p&gt;
 
@@ -79,7 +314,9 @@ After a number of requests from frustrated developers we’ve started providing 
     │   ├── Debug     &amp;lt; x86 debug libraries
     │   ├── Release   &amp;lt; x86 release libraries
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="build-options"&gt;Build options&lt;/h2&gt;
+&lt;h2 id="build-details"&gt;Build details&lt;/h2&gt;
+
+&lt;p&gt;Libraries have been compiled with Visual Studio 2015 Update 2 on Windows 10, with both &lt;code&gt;Debug&lt;/code&gt; and &lt;code&gt;Release&lt;/code&gt; versions provided for &lt;code&gt;x86&lt;/code&gt; and &lt;code&gt;x64&lt;/code&gt; architectures.&lt;/p&gt;
 
 &lt;p&gt;Debug builds have been created with all debug symbols enabled, and release builds have been optimized for for maximum performance. The exact build options used are as follows:&lt;/p&gt;
 
@@ -91,8 +328,8 @@ gn gen out/x64/Release --args&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class=
   </entry>
   <entry>
     <title>Generating Beautiful C++ Markdown Documentation with Moxygen</title>
-    <link rel="alternate" href="http://sourcey.com/generating-beautiful-markdown-documentation-with-moxygen/"/>
-    <id>http://sourcey.com/generating-beautiful-markdown-documentation-with-moxygen/</id>
+    <link rel="alternate" href="https://sourcey.com/generating-beautiful-markdown-documentation-with-moxygen/"/>
+    <id>https://sourcey.com/generating-beautiful-markdown-documentation-with-moxygen/</id>
     <published>2016-11-10T00:00:00Z</published>
     <updated>2016-11-10T20:38:18+01:00</updated>
     <author>
@@ -224,8 +461,8 @@ Options:
   </entry>
   <entry>
     <title>Recording Native WebRTC Streams with LibSourcey and FFmpeg</title>
-    <link rel="alternate" href="http://sourcey.com/recording-native-webrtc-streams-with-libsourcey-and-ffmpeg/"/>
-    <id>http://sourcey.com/recording-native-webrtc-streams-with-libsourcey-and-ffmpeg/</id>
+    <link rel="alternate" href="https://sourcey.com/recording-native-webrtc-streams-with-libsourcey-and-ffmpeg/"/>
+    <id>https://sourcey.com/recording-native-webrtc-streams-with-libsourcey-and-ffmpeg/</id>
     <published>2016-10-31T00:00:00Z</published>
     <updated>2016-10-31T12:57:18+01:00</updated>
     <author>
@@ -268,8 +505,8 @@ Options:
   </entry>
   <entry>
     <title>Spectacle</title>
-    <link rel="alternate" href="http://sourcey.com/spectacle/"/>
-    <id>http://sourcey.com/spectacle/</id>
+    <link rel="alternate" href="https://sourcey.com/spectacle/"/>
+    <id>https://sourcey.com/spectacle/</id>
     <published>2016-01-12T00:00:00Z</published>
     <updated>2017-03-29T20:42:14+02:00</updated>
     <author>
@@ -432,8 +669,8 @@ With Spectacle you can have beautiful HTML5 documentation for your API ready to 
   </entry>
   <entry>
     <title>Building the Perfect Rails 5 API Only App</title>
-    <link rel="alternate" href="http://sourcey.com/building-the-prefect-rails-5-api-only-app/"/>
-    <id>http://sourcey.com/building-the-prefect-rails-5-api-only-app/</id>
+    <link rel="alternate" href="https://sourcey.com/building-the-prefect-rails-5-api-only-app/"/>
+    <id>https://sourcey.com/building-the-prefect-rails-5-api-only-app/</id>
     <published>2015-12-26T00:00:00Z</published>
     <updated>2016-11-01T10:52:05+01:00</updated>
     <author>
@@ -821,233 +1058,6 @@ so that you can maintain backwards compatibility for existing clients whenever y
 &lt;p&gt;Hopefully then guide was helpful for you, and if you want any points clarified or just want to say thanks then feel free to use the comments below.&lt;/p&gt;
 
 &lt;p&gt;Cheers, and happy coding!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Android Custom Centered ActionBar with Material Design</title>
-    <link rel="alternate" href="http://sourcey.com/android-custom-centered-actionbar-with-material-design/"/>
-    <id>http://sourcey.com/android-custom-centered-actionbar-with-material-design/</id>
-    <published>2015-07-11T00:00:00Z</published>
-    <updated>2015-11-25T04:56:14+01:00</updated>
-    <author>
-      <name>Kam Low</name>
-    </author>
-    <content type="html">&lt;p&gt;The Android ActionBar is now easier to customise than ever, due to the fact that the old &lt;code&gt;ActionBar&lt;/code&gt; element has been replaced with the more versitile &lt;code&gt;Toolbar&lt;/code&gt;. Since &lt;code&gt;Toolbar&lt;/code&gt; inherits directly from &lt;code&gt;ViewGroup&lt;/code&gt;, you can essentially style or add any element you want to the ActionBar. That is, with the exception of a few gotchas, but you’re in luck because this article is here so you don’t get got!&lt;/p&gt;
-
-&lt;p&gt;Just a foreward to say that this article makes the assumption that you are using the support library - and if you’re not then you’re only targeting about 10% of devices which is more than a little strange.&lt;/p&gt;
-
-&lt;p&gt;OK, let’s code.&lt;/p&gt;
-
-&lt;p&gt;Below is the completed &lt;code&gt;Toolbar&lt;/code&gt; layout. Go ahead and add it to your project, and you can make changes from there.&lt;/p&gt;
-
-&lt;h4 id="reslayouttoolbarxml"&gt;/res/layout/toolbar.xml&lt;/h4&gt;
-&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version="1.0" encoding="utf-8"?&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;android.support.v7.widget.Toolbar&lt;/span&gt;
-    &lt;span class="na"&gt;xmlns:android=&lt;/span&gt;&lt;span class="s"&gt;"http://schemas.android.com/apk/res/android"&lt;/span&gt;
-    &lt;span class="na"&gt;xmlns:app=&lt;/span&gt;&lt;span class="s"&gt;"http://schemas.android.com/apk/res-auto"&lt;/span&gt;
-    &lt;span class="na"&gt;android:id=&lt;/span&gt;&lt;span class="s"&gt;"@+id/toolbar"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"?attr/actionBarSize"&lt;/span&gt;
-    &lt;span class="na"&gt;android:background=&lt;/span&gt;&lt;span class="s"&gt;"?attr/colorPrimary"&lt;/span&gt;
-    &lt;span class="na"&gt;app:popupTheme=&lt;/span&gt;&lt;span class="s"&gt;"@style/ThemeOverlay.AppCompat.Light"&lt;/span&gt;
-    &lt;span class="na"&gt;app:layout_scrollFlags=&lt;/span&gt;&lt;span class="s"&gt;"scroll|enterAlways"&lt;/span&gt;
-    &lt;span class="na"&gt;app:layout_collapseMode=&lt;/span&gt;&lt;span class="s"&gt;"pin"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;FrameLayout&lt;/span&gt;
-        &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-        &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- This is a centered logo --&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;ImageView&lt;/span&gt;
-            &lt;span class="na"&gt;android:id=&lt;/span&gt;&lt;span class="s"&gt;"@+id/toolbar_logo"&lt;/span&gt;
-            &lt;span class="na"&gt;android:src=&lt;/span&gt;&lt;span class="s"&gt;"@drawable/logo"&lt;/span&gt;
-            &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"wrap_content"&lt;/span&gt;
-            &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"fill_parent"&lt;/span&gt;
-            &lt;span class="na"&gt;android:layout_marginRight=&lt;/span&gt;&lt;span class="s"&gt;"?attr/actionBarSize"&lt;/span&gt;
-            &lt;span class="na"&gt;android:layout_marginTop=&lt;/span&gt;&lt;span class="s"&gt;"4dp"&lt;/span&gt;
-            &lt;span class="na"&gt;android:layout_marginBottom=&lt;/span&gt;&lt;span class="s"&gt;"4dp"&lt;/span&gt;
-            &lt;span class="na"&gt;android:layout_gravity=&lt;/span&gt;&lt;span class="s"&gt;"center"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- This is a centered title --&amp;gt;&lt;/span&gt;
-        &lt;span class="c"&gt;&amp;lt;!--
-        &amp;lt;TextView
-            android:id="@+id/toolbar_title"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="?attr/actionBarSize"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-            /&amp;gt;
-            --&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- This is a custom left side button --&amp;gt;&lt;/span&gt;
-        &lt;span class="c"&gt;&amp;lt;!--
-        &amp;lt;ImageButton
-            android:id="@+id/btn_settings"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginRight="?attr/actionBarSize"
-            android:layout_gravity="start|center_vertical"
-            android:visibility="invisible"
-            android:src="@drawable/ic_settings_white_24dp"
-            style="@style/Widget.AppCompat.ActionButton" /&amp;gt;
-            --&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- This is a custom right side button --&amp;gt;&lt;/span&gt;
-        &lt;span class="c"&gt;&amp;lt;!--
-        &amp;lt;ImageButton
-            android:id="@+id/btn_search"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_magnify_white_24dp"
-            style="@style/Widget.AppCompat.ActionButton" /&amp;gt;
-            --&amp;gt;&lt;/span&gt;
-
-    &lt;span class="nt"&gt;&amp;lt;/FrameLayout&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/android.support.v7.widget.Toolbar&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Below is a very minimal &lt;code&gt;MainActivity.java&lt;/code&gt; class which shows how to override the default ActionBar as simple as possible, and outlines some options that can be used to configure how the ActionBar behaves.&lt;/p&gt;
-
-&lt;h4 id="mainactivityjava"&gt;MainActivity.java&lt;/h4&gt;
-&lt;pre class="highlight java"&gt;&lt;code&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MainActivity&lt;/span&gt; &lt;span class="kd"&gt;extends&lt;/span&gt; &lt;span class="n"&gt;AppCompatActivity&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="nd"&gt;@Override&lt;/span&gt;
-    &lt;span class="kd"&gt;protected&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onCreate&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bundle&lt;/span&gt; &lt;span class="n"&gt;savedInstanceState&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="kd"&gt;super&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;onCreate&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;savedInstanceState&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-        &lt;span class="n"&gt;setContentView&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;layout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;activity_main&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// an example activity_main.xml is provided below&lt;/span&gt;
-
-        &lt;span class="c1"&gt;// Always cast your custom Toolbar here, and set it as the ActionBar.&lt;/span&gt;
-        &lt;span class="n"&gt;Toolbar&lt;/span&gt; &lt;span class="n"&gt;tb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Toolbar&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="n"&gt;findViewById&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toolbar&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-        &lt;span class="n"&gt;setSupportActionBar&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tb&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-
-        &lt;span class="c1"&gt;// Get the ActionBar here to configure the way it behaves.&lt;/span&gt;
-        &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="n"&gt;ActionBar&lt;/span&gt; &lt;span class="n"&gt;ab&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;getSupportActionBar&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-        &lt;span class="c1"&gt;//ab.setHomeAsUpIndicator(R.drawable.ic_menu); // set a custom icon for the default home button&lt;/span&gt;
-        &lt;span class="n"&gt;ab&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setDisplayShowHomeEnabled&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// show or hide the default home button&lt;/span&gt;
-        &lt;span class="n"&gt;ab&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setDisplayHomeAsUpEnabled&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-        &lt;span class="n"&gt;ab&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setDisplayShowCustomEnabled&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// enable overriding the default toolbar layout&lt;/span&gt;
-        &lt;span class="n"&gt;ab&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setDisplayShowTitleEnabled&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// disable the default title element here (for centered title)&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="centering-the-title-or-logo"&gt;Centering the Title or Logo&lt;/h2&gt;
-
-&lt;p&gt;Our custom ActionBar layout uses a centered title element by default (or logo depending on your preference of text or image as a title). This deviates from the Android stardard a little, which is to left align the title text and position it just to the right of the home button. Many apps still opt for the centered title design though, probably because it has been made popular on iOS.&lt;/p&gt;
-
-&lt;p&gt;A common gotcha here is that if we are aligning the title element with center gravity, and we are using any of the default toolbar buttons, then our custom toolbar will be pushed to the side of the default buttons, causing our title centering will be off by the width of the default button (unless of course you are using the default buttons on either side, in which case our cusorm toolbar will still be centered). To counter this, just add &lt;code&gt;android:layout_marginLeft|Right="?attr/actionBarSize"&lt;/code&gt;to the custom &lt;code&gt;TextView&lt;/code&gt; or &lt;code&gt;ImageView&lt;/code&gt; that’s acting as the centered title. Easy.&lt;/p&gt;
-
-&lt;p&gt;If you don’t want a centered title and would prefer to use the default left aligned ActionBar title, then just remove the &lt;code&gt;toolbar_logo&lt;/code&gt; and &lt;code&gt;toolbar_logo&lt;/code&gt; elements from the &lt;code&gt;toolbar.xml&lt;/code&gt; file, and remove the call to &lt;code&gt;ab.setDisplayShowTitleEnabled(false);&lt;/code&gt; from your &lt;code&gt;MainActivity.java&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id="material-design-buttons"&gt;Material Design Buttons&lt;/h2&gt;
-
-&lt;p&gt;To make your custom buttons play nicely inside the ActionBar and have transparent ripple effects just add the &lt;code&gt;Widget.AppCompat.ActionButton&lt;/code&gt; style to each &lt;code&gt;ImageButton&lt;/code&gt;, like so:&lt;/p&gt;
-
-&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;ImageButton&lt;/span&gt;
-    &lt;span class="na"&gt;android:id=&lt;/span&gt;&lt;span class="s"&gt;"@+id/btn_search"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"?attr/actionBarSize"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"?attr/actionBarSize"&lt;/span&gt;
-    &lt;span class="na"&gt;android:src=&lt;/span&gt;&lt;span class="s"&gt;"@drawable/ic_magnify_white_24dp"&lt;/span&gt;
-    &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"@style/Widget.AppCompat.ActionButton"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A m ore complete example has already been provided in the &lt;code&gt;toolbar.xml&lt;/code&gt; file above.&lt;/p&gt;
-
-&lt;p&gt;Obviously, if you wanted to extend the default &lt;code&gt;Widget.AppCompat.ActionButton&lt;/code&gt; style, you could do so via &lt;code&gt;styles.xml&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre class="highlight xml"&gt;&lt;code&gt;    &lt;span class="nt"&gt;&amp;lt;style&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"AppTheme.ActionButton"&lt;/span&gt; &lt;span class="na"&gt;parent=&lt;/span&gt;&lt;span class="s"&gt;"Widget.AppCompat.ActionButton"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class="c"&gt;&amp;lt;!-- Your custom styles here --&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To enable your custom style just replace &lt;code&gt;style="@style/Widget.AppCompat.ActionButton"&lt;/code&gt; with &lt;code&gt;style="@style/AppTheme.ActionButton"&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id="using-appbarlayout-with-the-coordinatorlayout"&gt;Using AppBarLayout with the CoordinatorLayout&lt;/h2&gt;
-
-&lt;p&gt;If you’re going for a real Material Design interface, then you will probably want to utilise the &lt;code&gt;CoordinatorLayout&lt;/code&gt; class, and wrap your custom toolbar inside an &lt;code&gt;AppBarLayout&lt;/code&gt;. The &lt;code&gt;CoordinatorLayout&lt;/code&gt; lets you sprinkle some magic UX powder into your app by intelligently positioning and interacting with elements based on current scroll position. In the context of the &lt;code&gt;ActionBar&lt;/code&gt;, the &lt;code&gt;CoordinatorLayout&lt;/code&gt; provides the ability to automaticly expand and collapse the toolbar with parralax background images.&lt;/p&gt;
-
-&lt;p&gt;An example layout would look like so:&lt;/p&gt;
-
-&lt;h4 id="reslayoutappbarxml"&gt;/res/layout/appbar.xml&lt;/h4&gt;
-&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version="1.0" encoding="utf-8"?&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;android.support.design.widget.AppBarLayout&lt;/span&gt;
-    &lt;span class="na"&gt;xmlns:android=&lt;/span&gt;&lt;span class="s"&gt;"http://schemas.android.com/apk/res/android"&lt;/span&gt;
-    &lt;span class="na"&gt;xmlns:app=&lt;/span&gt;&lt;span class="s"&gt;"http://schemas.android.com/apk/res-auto"&lt;/span&gt;
-    &lt;span class="na"&gt;android:id=&lt;/span&gt;&lt;span class="s"&gt;"@+id/appbar"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"wrap_content"&lt;/span&gt;
-    &lt;span class="na"&gt;android:theme=&lt;/span&gt;&lt;span class="s"&gt;"@style/ThemeOverlay.AppCompat.Dark.ActionBar"&lt;/span&gt;
-    &lt;span class="na"&gt;android:fitsSystemWindows=&lt;/span&gt;&lt;span class="s"&gt;"true"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class="c"&gt;&amp;lt;!--
-      Make your toolbar expandable with CollapsingToolbarLayout
-      Note that a centered ActionBar won't play nicely with the CollapsingToolbarLayout
-    --&amp;gt;&lt;/span&gt;
-    &lt;span class="c"&gt;&amp;lt;!--
-    &amp;lt;android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/collapsing_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        android:fitsSystemWindows="true"
-        app:contentScrim="?attr/colorPrimary"
-        app:expandedTitleMarginStart="48dp"
-        app:expandedTitleMarginEnd="64dp"&amp;gt;
-        --&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- Add a parallax background image if using CollapsingToolbarLayout --&amp;gt;&lt;/span&gt;
-        &lt;span class="c"&gt;&amp;lt;!--
-        &amp;lt;ImageView
-            android:id="@+id/backdrop"
-            android:src="@drawable/backdrop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:layout_collapseMode="parallax" /&amp;gt;
-            --&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- Include our custom Toolbar --&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;include&lt;/span&gt; &lt;span class="na"&gt;layout=&lt;/span&gt;&lt;span class="s"&gt;"@layout/toolbar"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class="c"&gt;&amp;lt;!--
-    &amp;lt;/android.support.design.widget.CollapsingToolbarLayout&amp;gt;
-    --&amp;gt;&lt;/span&gt;
-
-&lt;span class="nt"&gt;&amp;lt;/android.support.design.widget.AppBarLayout&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id="reslayoutmainactivityxml"&gt;/res/layout/main_activity.xml&lt;/h4&gt;
-&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version="1.0" encoding="utf-8"?&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;android.support.design.widget.CoordinatorLayout&lt;/span&gt;
-    &lt;span class="na"&gt;xmlns:android=&lt;/span&gt;&lt;span class="s"&gt;"http://schemas.android.com/apk/res/android"&lt;/span&gt;
-    &lt;span class="na"&gt;xmlns:app=&lt;/span&gt;&lt;span class="s"&gt;"http://schemas.android.com/apk/res-auto"&lt;/span&gt;
-    &lt;span class="na"&gt;android:id=&lt;/span&gt;&lt;span class="s"&gt;"@+id/coordinator"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-    &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-    &lt;span class="na"&gt;android:fitsSystemWindows=&lt;/span&gt;&lt;span class="s"&gt;"true"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class="c"&gt;&amp;lt;!-- Include the AppBarLayout --&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;include&lt;/span&gt; &lt;span class="na"&gt;layout=&lt;/span&gt;&lt;span class="s"&gt;"@layout/appbar"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class="nt"&gt;&amp;lt;FrameLayout&lt;/span&gt;
-        &lt;span class="na"&gt;android:id=&lt;/span&gt;&lt;span class="s"&gt;"@+id/main_fragment"&lt;/span&gt;
-        &lt;span class="na"&gt;android:layout_width=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-        &lt;span class="na"&gt;android:layout_height=&lt;/span&gt;&lt;span class="s"&gt;"match_parent"&lt;/span&gt;
-        &lt;span class="na"&gt;app:layout_behavior=&lt;/span&gt;&lt;span class="s"&gt;"@string/appbar_scrolling_view_behavior"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-
-        &lt;span class="c"&gt;&amp;lt;!-- Add you content here --&amp;gt;&lt;/span&gt;
-
-    &lt;span class="nt"&gt;&amp;lt;/FrameLayout&amp;gt;&lt;/span&gt;
-
-&lt;span class="nt"&gt;&amp;lt;/android.support.design.widget.CoordinatorLayout&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That should get you started. Please drop a line if you have anything to add, or just want to say thanks. Now go fourth and create!&lt;/p&gt;
-
-&lt;h2 id="watch-the-video"&gt;Watch the Video&lt;/h2&gt;
-
-&lt;p&gt;The guys and gals over at &lt;a href="https://www.webucator.com/programming/android-training.cfm"&gt;Webucator&lt;/a&gt; have created a video tutorial from this post. Check it out:&lt;/p&gt;
-
-&lt;iframe width="640" height="360" src="https://www.youtube.com/embed/kUIn8NJTEhk" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;
 </content>
   </entry>
 </feed>
